@@ -2,102 +2,94 @@ package ua.com.foxminded.integerdivision;
 
 public class LongDivision {
 
+    public String longDivisionMethod(int numerator, int denominator) {
 
-    private void header(int numerator, int denominator, int numberofdigitsinthenumerator) {
-
-        int answer = numerator / denominator;
-        String space = " ";
-        String split = "-";
-
-        ArrayOutOfNumber arrayanswer = new ArrayOutOfNumber();
-        int[] arrayansweracting = arrayanswer.arraynumber(answer);
-        int subtractednumber = arrayansweracting[0] * denominator;
-
-        String spacesforplashka = space.repeat(numberofdigitsinthenumerator - String.valueOf(subtractednumber).length());
-
-        System.out.println("_" + numerator + "|" + denominator);
-        System.out.println(" " + subtractednumber + spacesforplashka + "|-----");
-        System.out.println(" " + split.repeat(String.valueOf(subtractednumber).length()) + spacesforplashka + "|" + answer);
-    }
-
-    public boolean longdivisiontoconsole(int numerator, int denominator) {
-
-        boolean noterror = true;
+        String result = new String();
+        boolean notError = true;
 
         // исключения
         if (denominator == 0) {
-            noterror = false;
-            System.out.println("Denominator must be greater than zero and not equal to zero");
-            return noterror;
+            notError = false;
+            result = "Denominator must be greater than zero and not equal to zero";
+            return result;
         }
 
         if (numerator > 2147483647 || denominator > 2147483647) {
-            noterror = false;
-            System.out.println("Number is too large");
-            return noterror;
+            notError = false;
+            result = "Number is too large";
+            return result;
         }
         if (numerator < 0 || denominator < 0) {
-            noterror = false;
-            System.out.println("Numerator and denominator must not be less than zero");
-            return noterror;
+            notError = false;
+            result = "Numerator and denominator must not be less than zero";
+            return result;
         }
         if (numerator < denominator) {
-            noterror = false;
-            System.out.println("Denominator must not be greater than the numerator");
-            return noterror;
+            notError = false;
+            result = "Denominator must not be greater than the numerator";
+            return result;
         }
 
-        if (noterror = true) {
+        if (notError = true) {
 
-            ArrayOutOfNumber arraynumerator = new ArrayOutOfNumber();
-            int[] arraynumeratoracting = arraynumerator.arraynumber(numerator);
-
+            int answer = numerator / denominator;
             String space = " ";
             String split = "-";
 
-            int numberofdigitsinthenumerator = arraynumeratoracting.length;
-            LongDivision outputinheader = new LongDivision();
-            outputinheader.header(numerator, denominator, numberofdigitsinthenumerator);
+            ArrayOutOfNumber arrayNumerator = new ArrayOutOfNumber();
+            int[] arrayNumeratorActing = arrayNumerator.arrayNumber(numerator);
 
-            int subtractednumber = 0;
-            int decreasednumber = arraynumeratoracting[0];
+            int numberOfDigitsInTheNumerator = arrayNumeratorActing.length;
+
+            ArrayOutOfNumber arrayAnswer = new ArrayOutOfNumber();
+            int[] arrayAnswerActing = arrayAnswer.arrayNumber(answer);
+            int subtractedNumber = arrayAnswerActing[0] * denominator;
+
+            String spacesForPlashka = space.repeat(numberOfDigitsInTheNumerator - String.valueOf(subtractedNumber).length());
+
+            result = "_" + numerator + "|" + denominator + "\n";
+            result += " " + subtractedNumber + spacesForPlashka + "|-----" + "\n";
+            result += " " + split.repeat(String.valueOf(subtractedNumber).length()) + spacesForPlashka + "|" + answer + "\n";
+
+
+            int decreasedNumber = arrayNumeratorActing[0];
             int g = 0;
-            int numberofcycles = 0;
+            int numberOfCycles = 0;
 
-            while (g < (arraynumeratoracting.length - 1)) {
+            while (g < (arrayNumeratorActing.length - 1)) {
 
-                String spacesforcycle = space.repeat(g + 1 - String.valueOf(decreasednumber).length());
+                String spacesForCycle = space.repeat(g + 1 - String.valueOf(decreasedNumber).length());
 
-                while (decreasednumber < denominator) {
+                while (decreasedNumber < denominator) {
                     g++;
-                    if (g == arraynumeratoracting.length) {
+                    if (g == arrayNumeratorActing.length) {
                         break;
                     }
-                    if (decreasednumber == 0) {
-                        decreasednumber = arraynumeratoracting[g];
+                    if (decreasedNumber == 0) {
+                        decreasedNumber = arrayNumeratorActing[g];
                         break;
                     }
-                    decreasednumber = Integer.valueOf(String.valueOf(decreasednumber) + String.valueOf(arraynumeratoracting[g]));
+                    decreasedNumber = Integer.valueOf(String.valueOf(decreasedNumber) + String.valueOf(arrayNumeratorActing[g]));
                 }
 
-                if (numberofcycles > 0) {
-                    System.out.println(spacesforcycle + "_" + decreasednumber);
+                if (numberOfCycles > 0) {
+                    result += spacesForCycle + "_" + decreasedNumber + "\n";
                 }
 
-                int degree = Math.round(decreasednumber / denominator);
-                subtractednumber = denominator * degree;
-                decreasednumber = decreasednumber - (subtractednumber);
+                int degree = Math.round(decreasedNumber / denominator);
+                subtractedNumber = denominator * degree;
+                decreasedNumber = decreasedNumber - (subtractedNumber);
 
-                if (numberofcycles > 0) {
-                    System.out.println(spacesforcycle + " " + (subtractednumber));
-                    System.out.println(spacesforcycle + " " + split.repeat(String.valueOf(decreasednumber).length() + 1));
+                if (numberOfCycles > 0) {
+                    result += spacesForCycle + " " + (subtractedNumber) + "\n";
+                    result += spacesForCycle + " " + split.repeat(String.valueOf(decreasedNumber).length() + 1) + "\n";
                 }
-                if (g == (arraynumeratoracting.length - 1)) {
-                    System.out.println(spacesforcycle + "  " + decreasednumber);
+                if (g == (arrayNumeratorActing.length - 1)) {
+                    result += spacesForCycle + "  " + decreasedNumber;
                 }
-                numberofcycles++;
+                numberOfCycles++;
             }
         }
-        return noterror;
+        return result;
     }
 }

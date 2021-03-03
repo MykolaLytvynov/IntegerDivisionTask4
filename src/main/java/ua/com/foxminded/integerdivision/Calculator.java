@@ -4,7 +4,8 @@ public class Calculator {
     public static void main(String[] args) {
 
         LongDivision example = new LongDivision();
-        example.longdivisiontoconsole(123,122);
+        String exampleForConsole = example.longDivisionMethod(123,1);
+        System.out.print(exampleForConsole);
 
         }
     }
