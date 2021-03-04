@@ -1,8 +1,8 @@
 package ua.com.foxminded.integerdivision;
 
 public class LongDivision {
-    String space = " ";
-    String split = "-";
+    static final String SPACE = " ";
+    static final String SPLIT = "-";
 
     public String longDivisionMethod(int numerator, int denominator) {
 
@@ -11,17 +11,17 @@ public class LongDivision {
 
         int answer = numerator / denominator;
 
-        int[] arrayNumeratorActing = MakeArrayOutOfNumber(numerator);
+        int[] arrayNumeratorActing = makeArrayOutOfNumber(numerator);
         int numberOfDigitsInTheNumerator = arrayNumeratorActing.length;
 
-        int[] arrayAnswerActing = MakeArrayOutOfNumber(answer);
+        int[] arrayAnswerActing = makeArrayOutOfNumber(answer);
         int subtractedNumber = arrayAnswerActing[0] * denominator;
 
-        String spacesForPlashka = space.repeat(numberOfDigitsInTheNumerator - String.valueOf(subtractedNumber).length());
+        String spacesForPlashka = SPACE.repeat(numberOfDigitsInTheNumerator - String.valueOf(subtractedNumber).length());
 
         result = "_" + numerator + "|" + denominator + "\n";
         result += " " + subtractedNumber + spacesForPlashka + "|-----" + "\n";
-        result += " " + split.repeat(String.valueOf(subtractedNumber).length()) + spacesForPlashka + "|" + answer + "\n";
+        result += " " + SPLIT.repeat(String.valueOf(subtractedNumber).length()) + spacesForPlashka + "|" + answer + "\n";
 
         int decreasedNumber = arrayNumeratorActing[0];
         int g = 0;
@@ -29,7 +29,7 @@ public class LongDivision {
 
         while (g < (arrayNumeratorActing.length - 1)) {
 
-            String spacesForCycle = space.repeat(g + 1 - String.valueOf(decreasedNumber).length());
+            String spacesForCycle = SPACE.repeat(g + 1 - String.valueOf(decreasedNumber).length());
 
             while (decreasedNumber < denominator) {
                 g++;
@@ -53,7 +53,7 @@ public class LongDivision {
 
             if (numberOfCycles > 0) {
                 result += spacesForCycle + " " + (subtractedNumber) + "\n";
-                result += spacesForCycle + " " + split.repeat(String.valueOf(decreasedNumber).length() + 1) + "\n";
+                result += spacesForCycle + " " + SPLIT.repeat(String.valueOf(decreasedNumber).length() + 1) + "\n";
             }
             if (g == (arrayNumeratorActing.length - 1)) {
                 result += spacesForCycle + "  " + decreasedNumber;
@@ -63,7 +63,7 @@ public class LongDivision {
         return result;
     }
 
-    private int[] MakeArrayOutOfNumber(int numberForArray) {
+    private int[] makeArrayOutOfNumber(int numberForArray) {
         int arraySize = Integer.toString(numberForArray).length();
         int[] myArray = new int[arraySize];
         for (int i = myArray.length - 1; i > 0; i--) {
